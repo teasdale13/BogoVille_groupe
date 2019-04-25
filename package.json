@@ -1,0 +1,8 @@
+{
+  "name": "BogoVille_groupe",
+  "version": "1.0.0",
+  "dependencies": {
+    "react": "latest",
+    "react-router-dom": "latest"
+  }
+}
