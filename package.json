@@ -2,7 +2,37 @@
   "name": "BogoVille_groupe",
   "version": "1.0.0",
   "dependencies": {
-    "react": "latest",
-    "react-router-dom": "latest"
+    "@material-ui/core": "^3.9.3",
+    "axios": "^0.18.0",
+    "latest-version": "^5.1.0",
+    "material-ui": "^0.20.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "latest",
+    "react-script": "^2.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "react-scripts": "^3.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

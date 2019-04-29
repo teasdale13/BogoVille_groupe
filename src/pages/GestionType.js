@@ -30,7 +30,7 @@ export default class GestionType extends React.Component{
         return(
             <div className="App">
                 <Drawer open={this.state.open} className="Drawer">
-                    {drawer}
+
                 </Drawer>
                 <div className="Header">
                     <header>

@@ -6,15 +6,7 @@
  * Time: 14:52
  */
 
-/**
- * Class RequestType Classe qui a pour fonction de baliser les types de requêtes HTTP
- */
-class RequestType{
-    static $GET = "GET";
-    static $POST = "POST";
-    static $PUT = "PUT";
-    static $DELETE = "DELETE";
-}
+namespace backend;
 
 class CurlRequestGenerator
 {

@@ -10,17 +10,13 @@ export default class Page extends React.Component {
         this.state = {open: false};
     }
 
-
-
     handleToggle = () => this.setState({open: !this.state.open});
 
     render() {
-
-
         return(
         <div className="App">
             <Drawer open={this.state.open} className="Drawer">
-                <Cdrawer />
+
             </Drawer>
             <div className="Header">
                 <header>
@@ -55,4 +51,3 @@ export default class Page extends React.Component {
         );
     }
 }
-
