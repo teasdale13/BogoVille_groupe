@@ -1,33 +1,89 @@
 .App {
   text-align: center;
+  height: 100vh;
+  font-size: 10px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.Link {
+text-decoration: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 50vh;
+
+.Header {
+  background-color: lightblue;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  text-align: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 20%;
+  font-size: 1vw;
+ }
+
+.Drawer{
+  width:100%;
+}
+
+.Wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Horizontal {
+  display: flex;
+  height: 70%;
+}
+
+.NavBar{
+  background-color: gray;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+}
+
+.LeftFlex {
+  width: 30%;
+  background-color: darkgray;
+  display: flex;
+}
+
+.RightFlex {
+  width: 70%;
+  background-color: lightgray;
+  display: flex;
+}
+
+.Footer {
+  background-color: black;
+  display: flex;
+  height: 10%;
   color: white;
+  text-align: center;
+  justify-content: center;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (max-width: 700px) {
+  .Header {
+    font-size: 3vw;
   }
-  to {
-    transform: rotate(360deg);
+
+  .Horizontal {
+    flex-direction: column;
+  }
+
+  .RightFlex {
+    background-color: lightgray;
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .LeftFlex {
+    background-color: darkgray;
+    height: 20%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 }
