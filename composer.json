@@ -1,0 +1,21 @@
+{
+  "name": "bogo/bogoville_groupe",
+  "description": "description_text",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "author's name",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "slim/slim": "^3.0",
+    "phpunit/phpunit": "^6"
+  },
+  "autoload": {
+    "psr-4": {
+      "backend\\": "backend/"
+    }
+  }
+}
