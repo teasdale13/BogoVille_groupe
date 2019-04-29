@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Nav from './Navigatron'
+
 
 
 export class App extends React.Component {
@@ -56,23 +59,9 @@ export class App extends React.Component {
 
   render() {
     return (
-        <Router>
-            <div className="App">
-                <p>{this.state.test}</p>
-                <ul>
-                    <li>
-                        <Link to="/evenement/2">Evenement</Link>
-                    </li>
-                    <li>
-                        <Link to="/probleme/4">Probleme</Link>
-                    </li>
-                </ul>
-
-                /* :model représente evenement et problème des tag <Link> et :id 2 et 4 */
-                <Route path="/:model/:id" component={this.Child}/>
-
-            </div>
-        </Router>
+        <MuiThemeProvider>
+            <Nav />
+        </MuiThemeProvider>
 
     );
   }
