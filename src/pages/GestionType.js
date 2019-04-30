@@ -1,7 +1,7 @@
 import React from "react";
 import RaisedButton from 'material-ui/RaisedButton';
 import Drawer from 'material-ui/Drawer';
-import drawer from './Cdrawer';
+import Cdrawer from './Cdrawer';
 
 
 import {
@@ -14,24 +14,22 @@ import {
 } from 'material-ui/Table';
 
 export default class GestionType extends React.Component{
-
     constructor(props) {
         super(props);
         this.state = {open: false};
+        this.drawerButton = this.drawerButton.bind(this);
     }
 
-
-
-    handleToggle = () => this.setState({open: !this.state.open});
+    drawerButton(){
+        this.setState({open: !this.state.open});
+    }
 
     render(){
 
 
         return(
             <div className="App">
-                <Drawer open={this.state.open} className="Drawer">
-
-                </Drawer>
+                <Cdrawer drawer={this.state.open} drawerButton={this.drawerButton} />
                 <div className="Header">
                     <header>
                         <h1>Gestion des types</h1>
@@ -41,7 +39,7 @@ export default class GestionType extends React.Component{
                 <div className="NavBar">
                     <RaisedButton
                         label="Options Ultra Cool"
-                        onClick={this.handleToggle}
+                        onClick={this.drawerButton}
                         primary={true}
                     />
                 </div>
