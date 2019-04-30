@@ -3,6 +3,7 @@ import Page from "./pages/Page";
 import BootStrap from "./pages/BootStrap";
 import GestionType from "./pages/GestionType";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import GestionProbleme from "./Pages/GestionProbleme";
 
 function Nav() {
     return (
@@ -13,6 +14,8 @@ function Nav() {
                 <Route path="/BootStrap" component={BootStrap} />
 
                 <Route path="/GestionType" component={GestionType} />
+
+                <Route path="/GestionProbleme" component={GestionProbleme} />
         </Router>
     );
 }
