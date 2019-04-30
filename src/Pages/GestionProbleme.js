@@ -68,6 +68,7 @@ export default class GestionProbleme extends React.Component{
 
 
 
+
     render(){
         // Créer un header dynamique.
         const tableHeader = this.state.rows.map(header =>
