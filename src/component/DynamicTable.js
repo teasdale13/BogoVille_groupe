@@ -15,7 +15,7 @@ export default class DynamicTable extends React.Component {
 
     render() {
         /* Créer le HEADER du tableau */
-        const headerRow = this.props.header === undefined?
+        const headerRow = this.props.header.length <= 0 ?
             <TableHeaderColumn>
                 Rien a afficher
             </TableHeaderColumn>:
@@ -29,7 +29,7 @@ export default class DynamicTable extends React.Component {
         );
 
         /* Créer le tableau dynamiquement selon le nombre d'enregistrements. */
-        const tableRow = this.props.listRow === undefined ?
+        const tableRow = this.props.listRow.length <= 0 ?
             <TableRow>
                 <TableRowColumn>
                     Aucuns enregistrements

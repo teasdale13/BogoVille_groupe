@@ -8,7 +8,11 @@ import DynamicTable from "../component/DynamicTable";
 export default class Page extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {open: false};
+        this.state = {
+            open: false,
+            header: [],
+            listRow: []
+        };
         this.drawerButton = this.drawerButton.bind(this);
     }
 
@@ -31,7 +35,7 @@ export default class Page extends React.Component {
                     <div className="LeftFlex">
                         <p>??</p>
                     </div>
-                    <DynamicTable/>
+                    <DynamicTable header={this.state.header} listRow={this.state.listRow} />
                 </div>
                 <Footer/>
             </div>
