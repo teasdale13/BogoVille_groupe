@@ -3,7 +3,7 @@ import Page from "./pages/Page";
 import BootStrap from "./pages/BootStrap";
 import GestionType from "./pages/GestionType";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import GestionProbleme from "./Pages/GestionProbleme";
+import GestionProbleme from "./pages/GestionProbleme";
 
 function Nav() {
     return (
