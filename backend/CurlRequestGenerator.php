@@ -40,6 +40,11 @@ class CurlRequestGenerator
         return self::generateRequest(curl_init($this->url), $this->requestType, $this->requestData->getDatas());
     }
 
+
+    private function setCurlBasicAuthentification($ch, $user='admin', $pass='admin'){
+        curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+    }
+
     /**
      * Procède à la construction et l'exécution de la requête HTTP sur la base des éléments fourni dans la propriété
      * $requestData
@@ -52,6 +57,7 @@ class CurlRequestGenerator
     private function generateRequest($ch, $requestType, $datas){
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $requestType);
+        $this->setCurlBasicAuthentification($ch);
         if($datas){
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($datas));
         }
