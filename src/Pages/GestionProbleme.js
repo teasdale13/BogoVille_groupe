@@ -4,6 +4,7 @@ import Header from "../component/Header";
 import NavBar from "../component/NavBar";
 import DynamicTable from "../component/DynamicTable";
 import Footer from "../component/Footer";
+import ProblemTable from "../component/ProblemTable";
 
 export default class GestionProbleme extends React.Component {
     constructor(props) {
@@ -11,8 +12,7 @@ export default class GestionProbleme extends React.Component {
         this.state = {
             open: false,
             // Listes factices qui simule les requêtes au service REST
-            status: [{id: 1, description: "status"}, {id: 2, description: "status2"}, {id: 3, description: "status3"},
-                {id: 4, description: "status4"}, {id: 5, description: "status5"}, {id: 6, description: "status6"}],
+
 
             types: [{id: 1, description: "type1"}, {id: 2, description: "type2"}, {id: 3, description: "type3"},
                 {id: 4, description: "type4"}, {id: 5, description: "type5"}, {id: 6, description: "type6"}],
@@ -29,6 +29,7 @@ export default class GestionProbleme extends React.Component {
         this.drawerButton = this.drawerButton.bind(this);
         this.renderIndex = this.renderIndex.bind(this);
     }
+
 
     /**
      * Fonction qui change le state du Drawer.
@@ -54,14 +55,14 @@ export default class GestionProbleme extends React.Component {
                         array[x].type = this.state.types[i].description;
                     }
                 }
-            }
+            }/*
             if (array[x].statut) {
                 for (let i = 0; i < this.state.status.length; i++) {
                     if (array[x].statut === this.state.status[i].id) {
                         array[x].statut = this.state.status[i].description;
                     }
                 }
-            }
+            }*/
         }
         return array;
     }
@@ -76,7 +77,7 @@ export default class GestionProbleme extends React.Component {
                     <div className="LeftFlex">
                         <p>??</p>
                     </div>
-                    <DynamicTable header={this.state.header} listRow={this.renderIndex(this.state.listRow)}/>
+                    <ProblemTable header={this.state.header} listRow={this.renderIndex(this.state.listRow)}/>
                 </div>
                 <Footer/>
             </div>
