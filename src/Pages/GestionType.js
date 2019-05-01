@@ -1,101 +1,48 @@
 import React from "react";
-import RaisedButton from 'material-ui/RaisedButton';
-import Drawer from 'material-ui/Drawer';
-import Cdrawer from './Cdrawer';
-
-
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-} from 'material-ui/Table';
+import Cdrawer from '../component/Cdrawer';
+import Header from "../component/Header";
+import NavBar from "../component/NavBar";
+import DynamicTable from "../component/DynamicTable";
+import Footer from "../component/Footer";
 
 export default class GestionType extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {open: false};
+        this.state = {
+            open: false,
+            header: [{id: "ID", nom: "Nom" , description: "Description"}],
+            listRow: [
+                {id: 1, nom: "Nid de poule" , description: "Genre de trou dans la rue yo"},
+                {id: 2, nom: "Borne fontaine" , description: "Je sais pas c quoi mais criss ca coule"},
+                {id: 3, nom: "Arbre dans rue" , description: "Ca peux tu etre plus precis?"},
+                {id: 4, nom: "Yolaine" , description: "Yolaine a pas encore corriger calisse"},
+                {id: 5, nom: "Hold up a une banque" , description: "POW POW ca fait du bruit et ca fait peur"},
+            ]
+        };
         this.drawerButton = this.drawerButton.bind(this);
     }
 
+    /**
+     * Fonction qui change le state du Drawer.
+     * la fonction est aussi passé à l'enfant pour lui permettre de changer le state
+     */
     drawerButton(){
         this.setState({open: !this.state.open});
     }
 
     render(){
-
-
         return(
             <div className="App">
                 <Cdrawer drawer={this.state.open} drawerButton={this.drawerButton} />
-                <div className="Header">
-                    <header>
-                        <h1>Gestion des types</h1>
-                        <h2>Select your player</h2>
-                    </header>
-                </div>
-                <div className="NavBar">
-                    <RaisedButton
-                        label="Options Ultra Cool"
-                        onClick={this.drawerButton}
-                        primary={true}
-                    />
-                </div>
+                <Header title={"Gestion des types"} />
+                <NavBar drawerButton={this.drawerButton}/>
                 <div className="Horizontal">
-
                     <div className="LeftFlex">
                         <p>??</p>
                     </div>
-
-                    <div className="RightFlex">
-
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHeaderColumn>ID</TableHeaderColumn>
-                                    <TableHeaderColumn>Nom</TableHeaderColumn>
-                                    <TableHeaderColumn>Description</TableHeaderColumn>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                <TableRow>
-                                    <TableRowColumn>1</TableRowColumn>
-                                    <TableRowColumn>Nid de poule</TableRowColumn>
-                                    <TableRowColumn>Genre de trou dans la rue yo</TableRowColumn>
-                                </TableRow>
-                                <TableRow>
-                                    <TableRowColumn>2</TableRowColumn>
-                                    <TableRowColumn>Borne fontaine</TableRowColumn>
-                                    <TableRowColumn>Je sais pas c quoi mais criss ca coule</TableRowColumn>
-                                </TableRow>
-                                <TableRow>
-                                    <TableRowColumn>3</TableRowColumn>
-                                    <TableRowColumn>Arbre dans rue</TableRowColumn>
-                                    <TableRowColumn>Ca peux tu etre plus precis?</TableRowColumn>
-                                </TableRow>
-                                <TableRow>
-                                    <TableRowColumn>4</TableRowColumn>
-                                    <TableRowColumn>Yolaine</TableRowColumn>
-                                    <TableRowColumn>Yolaine a pas encore corriger calisse</TableRowColumn>
-                                </TableRow>
-                                <TableRow>
-                                    <TableRowColumn>5</TableRowColumn>
-                                    <TableRowColumn>Hold up a une banque</TableRowColumn>
-                                    <TableRowColumn>POW POW ca fait du bruit et ca fait peur</TableRowColumn>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-
-                    </div>
+                    <DynamicTable header={this.state.header} listRow={this.state.listRow}/>
                 </div>
-
-                <div className="Footer">
-                    <footer>
-                        <p>FOOTER</p>
-                    </footer>
-                </div>
+                <Footer/>
             </div>
         );
     }

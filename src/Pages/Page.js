@@ -1,61 +1,39 @@
 import React from "react";
-import RaisedButton from 'material-ui/RaisedButton';
-import Drawer from 'material-ui/Drawer';
-import Cdrawer from './Cdrawer'
-import MenuItem from "material-ui/MenuItem";
-import {Link} from "react-router-dom";
+import Cdrawer from '../component/Cdrawer'
+import Header from "../component/Header";
+import NavBar from "../component/NavBar";
+import Footer from "../component/Footer";
+import DynamicTable from "../component/DynamicTable";
 
 export default class Page extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {open: false};
         this.drawerButton = this.drawerButton.bind(this);
     }
 
-
-    drawerButton(){
+    /**
+     * Fonction qui change le state du Drawer.
+     * la fonction est aussi passé à l'enfant pour lui permettre de changer le state
+     */
+    drawerButton() {
         console.log("drawerButton function");
         this.setState({open: !this.state.open});
     }
 
-
     render() {
-
-
-        return(
-        <div className="App">
-                <Cdrawer drawer={this.state.open} drawerButton={this.drawerButton} />
-
-            <div className="Header">
-                <header>
-                    <h1>Bienvenue à Bogoville!</h1>
-                    <h2>Select your player</h2>
-                </header>
-            </div>
-            <div className="NavBar">
-                <RaisedButton
-                    label="Options Ultra Cool"
-                    onClick={this.drawerButton}
-                    primary={true}
-                />
-            </div>
-            <div className="Horizontal">
-
-                <div className="LeftFlex">
-                    <p>??</p>
+        return (
+            <div className="App">
+                <Cdrawer drawer={this.state.open} drawerButton={this.drawerButton}/>
+                <Header title={"Bienvenue à Bogoville!"}/>
+                <NavBar drawerButton={this.drawerButton}/>
+                <div className="Horizontal">
+                    <div className="LeftFlex">
+                        <p>??</p>
+                    </div>
+                    <DynamicTable/>
                 </div>
-
-                <div className="RightFlex">
-
-                </div>
-            </div>
-
-            <div className="Footer">
-                <footer>
-                    <p>FOOTER</p>
-                </footer>
-            </div>
+                <Footer/>
             </div>
         );
     }
