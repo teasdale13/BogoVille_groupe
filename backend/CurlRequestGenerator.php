@@ -42,7 +42,7 @@ class CurlRequestGenerator
 
 
     private function setCurlBasicAuthentification($ch, $user='admin', $pass='admin'){
-        curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+        curl_setopt($ch, CURLOPT_USERPWD, "$user:$pass");
     }
 
     /**
