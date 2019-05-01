@@ -37,8 +37,14 @@
   background-color: gray;
   display: flex;
   flex-direction: row;
-  text-align: center;
-  justify-content: center;
+  text-align: start;/*
+  justify-content: center;*/
+}
+
+.menuButton{
+  width: 2%;
+  height: 2%;
+  padding: 1vw;
 }
 
 .LeftFlex {
