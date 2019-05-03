@@ -1,8 +1,8 @@
 import React from "react";
-import Page from "./Pages/Page";
-import GestionType from "./Pages/GestionType";
+import Page from "./pages/Page";
+import GestionType from "./pages/GestionType";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import GestionProbleme from "./Pages/GestionProbleme";
+import GestionProbleme from "./pages/GestionProbleme";
 
 function Nav() {
     return (

@@ -8,7 +8,6 @@ import Footer from "../component/Footer";
 export default class GestionType extends React.Component{
     constructor(props) {
         super(props);
-        /*  */
         this.state = {
             open: false,
             header: [{id: "ID", nom: "Nom" , description: "Description"}],

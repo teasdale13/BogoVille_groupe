@@ -8,10 +8,13 @@ import DynamicTable from "../component/DynamicTable";
 export default class Page extends React.Component {
     constructor(props) {
         super(props);
+        /*  */
         this.state = {
             open: false,
             header: [],
-            listRow: []
+            listRow: [],
+            value: "",
+            value2: ""
         };
         this.drawerButton = this.drawerButton.bind(this);
     }
@@ -24,6 +27,9 @@ export default class Page extends React.Component {
         console.log("drawerButton function");
         this.setState({open: !this.state.open});
     }
+
+
+
 
     render() {
 
