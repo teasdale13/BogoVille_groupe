@@ -5,6 +5,7 @@ require 'vendor/autoload.php';
 
 use backend\RequestType;
 
+
 $configuration = [
     'settings' => [
         'displayErrorDetails' => false,
@@ -25,21 +26,21 @@ $app->get('/', function ($request, $response, $args) use($content){
 
 $app->get('/{model}', function ($request, $response, $args){
 
-        $generatron = new CurlRequestGenerator(RequestType::$GET, new CurlRequestData($args['model']));
+        $generatron = new \backend\CurlRequestGenerator(RequestType::$GET, new \backend\CurlRequestData($args['model']));
         return $generatron->curlRequest();
 
 });
 
 $app->get('/{model}/{id}', function ($request, $response, $args){
 
-        $generatron = new CurlRequestGenerator(RequestType::$GET, new CurlRequestData($args['model'], $args['id']));
+        $generatron = new \backend\CurlRequestGenerator(RequestType::$GET, new \backend\CurlRequestData($args['model'], $args['id']));
         return $generatron->curlRequest();
 
 });
 
 $app->get("/{field}/{fieldValue}/{model}", function ($request, $response, $args) {
 
-            $generatron = new CurlRequestGenerator(RequestType::$GET, new CurlRequestData($args['model']));
+            $generatron = new \backend\CurlRequestGenerator(RequestType::$GET, new \backend\CurlRequestData($args['model']));
             return $generatron->curlRequest();
 
 });
@@ -48,7 +49,7 @@ $app->get("/{field}/{fieldValue}/{model}", function ($request, $response, $args)
 $app->post('/{model}', function ($request, $response, $args) use ($content){
 
     $data = $request->getParsedBody();
-    $generatron = new CurlRequestGenerator(RequestType::$POST, new CurlRequestData($args['model'], null, $data));
+    $generatron = new \backend\CurlRequestGenerator(RequestType::$POST, new \backend\CurlRequestData($args['model'], null, $data));
     return $generatron->curlRequest();
 
 });
@@ -56,7 +57,7 @@ $app->post('/{model}', function ($request, $response, $args) use ($content){
 $app->put('\{model}\{id}', function ($request, $response, $args) use ($content){
 
     $data = $request->getParsedBody();
-    $generatron = new CurlRequestGenerator(RequestType::$PUT, new CurlRequestData($args['model'], $args['id'], $data));
+    $generatron = new \backend\CurlRequestGenerator(RequestType::$PUT, new \backend\CurlRequestData($args['model'], $args['id'], $data));
     return $generatron->curlRequest();
 
 });

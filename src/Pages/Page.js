@@ -8,6 +8,7 @@ import DynamicTable from "../component/DynamicTable";
 export default class Page extends React.Component {
     constructor(props) {
         super(props);
+        /*  */
         this.state = {
             open: false,
             header: [],
