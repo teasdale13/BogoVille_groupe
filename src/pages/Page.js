@@ -3,6 +3,7 @@ import Cdrawer from '../component/Cdrawer'
 import Header from "../component/Header";
 import NavBar from "../component/NavBar";
 import Footer from "../component/Footer";
+
 import DynamicTable from "../component/DynamicTable";
 
 export default class Page extends React.Component {
