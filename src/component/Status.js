@@ -32,7 +32,6 @@ export default class Status extends React.Component {
     }
 
     getStatus(idStatus) {
-        let indexOfArray = 0;
         for (let x = 0; x < this.state.status.length; x++) {
             console.log();
             if (this.state.status[x].idStatut === idStatus) {
@@ -49,9 +48,12 @@ export default class Status extends React.Component {
     };
 
     handleClose = (index) => {
+        console.log(index);
+        if (index > 0) {
+            this.setState({selected: index});
+            this.parentFunction(this.state.status[index - 1].idStatut, this.state.index);
+        }
         this.setState({anchorEl: null});
-        this.setState({selected: index});
-        this.parentFunction(this.state.status[index - 1].idStatut, this.state.index);
     };
 
 
