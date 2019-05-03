@@ -11,9 +11,7 @@ export default class Page extends React.Component {
         this.state = {
             open: false,
             header: [],
-            listRow: [],
-            value: "",
-            value2: ""
+            listRow: []
         };
         this.drawerButton = this.drawerButton.bind(this);
     }
@@ -26,9 +24,6 @@ export default class Page extends React.Component {
         console.log("drawerButton function");
         this.setState({open: !this.state.open});
     }
-
-
-
 
     render() {
 

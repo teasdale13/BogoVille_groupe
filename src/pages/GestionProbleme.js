@@ -4,7 +4,6 @@ import Header from "../component/Header";
 import NavBar from "../component/NavBar";
 import DynamicTable from "../component/DynamicTable";
 import Footer from "../component/Footer";
-import ProblemTable from "../component/ProblemTable";
 
 export default class GestionProbleme extends React.Component {
     constructor(props) {
@@ -56,13 +55,13 @@ export default class GestionProbleme extends React.Component {
                     }
                 }
             }
-            /*if (array[x].statut) {
+            if (array[x].statut) {
                 for (let i = 0; i < this.state.status.length; i++) {
                     if (array[x].statut === this.state.status[i].id) {
                         array[x].statut = this.state.status[i].description;
                     }
                 }
-            }*/
+            }
         }
         return array;
     }
@@ -77,7 +76,7 @@ export default class GestionProbleme extends React.Component {
                     <div className="LeftFlex">
                         <p>??</p>
                     </div>
-                    <ProblemTable header={this.state.header} listRow={this.renderIndex(this.state.listRow)}/>
+                    <DynamicTable header={this.state.header} listRow={this.renderIndex(this.state.listRow)}/>
                 </div>
                 <Footer/>
             </div>
