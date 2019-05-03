@@ -46,6 +46,8 @@ export default class Cdrawer extends React.Component {
                                 types</MenuItem></Link>
                             <Link to="/GestionProbleme" style={{textDecoration: 'none'}}><MenuItem>Gestion des
                                 Problèmes</MenuItem></Link>
+                            <Link to="/GestionNotification/notification" style={{textDecoration: 'none'}}><MenuItem>Gestion des
+                                Notifications</MenuItem></Link>
                             <RaisedButton label="Fermer" onClick={this.toggleButton}/>
                         </div>
                     </Drawer>
