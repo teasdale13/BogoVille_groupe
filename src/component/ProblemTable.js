@@ -26,33 +26,27 @@ export default class ProblemTable extends React.Component {
         this.renderIndex = this.renderIndex.bind(this);
     }
 
+
+    /**
+     * Fonction native de REACT. Lorsque le composant est "monté", elle fait une requête
+     * pour avoir tous les problèmes et types pour pouvoir les affichers correctements.
+     */
     componentDidMount() {
         const axios = require('axios');
         axios.get('http://localhost:80/probleme')
             .then(function (response) {
-                // handle success
                 this.setState({listRow: response.data});
                 axios.get("http://localhost:80/type")
                     .then(function (response) {
-                        // handle success
                         this.setState({type: response.data});
-                        console.log(response.data);
                     }.bind(this))
                     .catch(function (error) {
-                        // handle error
                         console.log(error);
                     });
             }.bind(this))
             .catch(function (error) {
-                // handle error
                 console.log(error);
-            })
-            .then(function () {
-                // always executed
-
             });
-
-
     }
 
     /**
@@ -70,20 +64,36 @@ export default class ProblemTable extends React.Component {
     }
 
 
+    /**
+     * Fonction passée en props à l'enfant (Status) qui renvoie la nouvelle valeur du statut
+     * et fait un update à la base de données avec les informations nécessaire.
+     *
+     * @param childData nouveau statut envoyé par l'enfant.
+     * @param index de l'enregistrement qui doit être modifié.
+     */
     changeSelectedStatus(childData, index) {
         const axios = require('axios');
         let array = this.state.listRow;
         array[index].id_statut = childData;
-        this.setState({listRow: array});
         axios({
             method: 'put',
             url: 'http://localhost:80/probleme/'+ array[index].idProbleme.toString(),
             data: {
                 id_statut: JSON.parse(childData)
             }
+        }).then((resp) => {
+            if (resp.status === 200){
+                this.setState({listRow: array});
+            }
+
         });
     }
 
+    /**
+     * Fonction qui tri les enregistrements selon la clé qui a été sélectionnée.
+     *
+     * @param key la clé qui correspond à la colonne qui doit être triée.
+     */
     sortTable(key) {
         this.setState({selectedSortHeader: key});
         let isAsc = this.state.asc === 'asc';

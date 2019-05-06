@@ -11,6 +11,7 @@ import TextField from "material-ui/TextField";
 import {TableCell} from "@material-ui/core";
 import EditIcon from "material-ui/svg-icons/image/edit";
 import CheckIcon from "material-ui/svg-icons/navigation/check";
+import TrashIcon from "material-ui/svg-icons/action/delete";
 
 export default class DynamicTable extends React.Component {
     constructor(props) {
@@ -19,11 +20,13 @@ export default class DynamicTable extends React.Component {
             listRow: [],
             edit: false,
             rowClick: null,
-            row: []
+            row: [],
+            update: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.updateRowClick = this.updateRowClick.bind(this);
         this.confirmUpdatedRow = this.confirmUpdatedRow.bind(this);
+        this.deleteRow = this.deleteRow.bind(this);
     }
 
     /**
@@ -32,6 +35,23 @@ export default class DynamicTable extends React.Component {
      * avec le model passé en props par le parent.
      */
     componentDidMount() {
+        const axios = require('axios');
+        axios.get('http://localhost:80/'  + this.props.model)
+            .then(function(response) {
+                this.setState({listRow: response.data});
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
+
+    /**
+     * Fonction native de REACT. Utilisée pour mettre à jour le tableau avec les données du REST API.
+     * @param nextProps
+     * @param nextContext
+     */
+    componentWillReceiveProps(nextProps, nextContext) {
         const axios = require('axios');
         axios.get('http://localhost:80/'  + this.props.model)
             .then(function(response) {
@@ -65,7 +85,9 @@ export default class DynamicTable extends React.Component {
         if (row === this.state.rowClick) {
             this.setState({rowClick: null});
             this.setState({edit: !this.state.edit});
-            //TODO Mettre requête pour faire modif sur REST API.
+            // appel à la fonction du parent pour modifier l'enregistrement.
+            this.props.getDataFromChildPut(row);
+
         }
     }
 
@@ -81,6 +103,32 @@ export default class DynamicTable extends React.Component {
         data[index] = event.target.value;
         this.setState({rowClick: data});
     };
+
+    /**
+     * Fonction qui demande la confirmation de la suppression et si TRUE, fait un appel pour supprimer
+     * l'enregistrement et par la suite refait un appel GET pour mettre a jour la liste.
+     *
+     * @param row l'enregistrement a supprimer.
+     */
+    deleteRow(row){
+        let keys =  Object.keys(row).map((value) => value);
+        let response = window.confirm("Voulez-vous vraiment supprimé?");
+        if (response){
+            const axios = require('axios');
+            axios({
+                method: 'delete',
+                url: 'http://localhost:80/' + this.props.model + '/' + row[keys[0]].toString()
+            }).then(() => {
+                axios.get('http://localhost:80/' + this.props.model)
+                    .then(function (response) {
+                        this.setState({listRow: response.data});
+                    }.bind(this))
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            });
+        }
+    }
 
     render() {
         /* Créer le HEADER du tableau */
@@ -104,7 +152,7 @@ export default class DynamicTable extends React.Component {
                     Aucuns enregistrements
                 </TableRowColumn>
             </TableRow> :
-            (this.state.listRow.map((items) =>
+            (this.state.listRow.map((items, index) =>
                 <TableRow>
                     {Object.values(items).map((key, value, itemP) =>
                         <TableRowColumn>{
@@ -131,6 +179,10 @@ export default class DynamicTable extends React.Component {
                         <EditIcon
                             onClick={() => this.updateRowClick(items)}
                         />}
+
+                        <TrashIcon
+                            onClick={() => this.deleteRow(items)}
+                        />
                     </TableCell>
                 </TableRow>
             ));

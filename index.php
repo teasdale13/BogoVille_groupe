@@ -55,11 +55,15 @@ $app->post('/{model}', function ($request, $response, $args) use ($content){
 });
 
 $app->put('/{model}/{id}', function ($request, $response, $args) use ($content){
-
-
     $data = $request->getParsedBody();
-    var_dump($data);
     $generatron = new \backend\CurlRequestGenerator(RequestType::$PUT, new \backend\CurlRequestData($args['model'], $args['id'], $data));
+    return $generatron->curlRequest();
+
+});
+
+$app->delete('/{model}/{id}', function ($request, $response, $args) use ($content){
+    $data = $request->getParsedBody();
+    $generatron = new \backend\CurlRequestGenerator(RequestType::$DELETE, new \backend\CurlRequestData($args['model'], $args['id'], $data));
     return $generatron->curlRequest();
 
 });
