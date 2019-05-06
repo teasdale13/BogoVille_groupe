@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import injectTapEventPlugin from "react-tap-event-plugin";
 import orderBy from "lodash/orderBy";
 
-import Form from "./Form";
+import Formulaire from "./Form";
 import Table from "./Table";
 import Cdrawer from "../../component/Cdrawer";
 import Header from "../../component/Header";
 import NavBar from "../../component/NavBar";
 
-injectTapEventPlugin();
+
 
 const invertDirection = {
     asc: "desc",
@@ -18,6 +17,7 @@ const invertDirection = {
 
 class App extends Component {
     state = {
+        open: false,
         data: [
             {
                 Id: "Tann",
@@ -53,6 +53,11 @@ class App extends Component {
         columnToSort: "",
         sortDirection: "desc"
     };
+    drawerButton = this.drawerButton.bind(this);
+    drawerButton() {
+        console.log("drawer Button");
+        this.setState({open: !this.state.open});
+    }
 
     handleRemove = i => {
         this.setState(state => ({
@@ -88,13 +93,14 @@ class App extends Component {
     };
 
     render() {
+        console.log(this.state.data);
         return (
             <MuiThemeProvider>
                 <div className="App">
                     <Cdrawer drawer={this.state.open} drawerButton={this.drawerButton}/>
                     <Header  title={"Gestion des notifications"}  />
                     <NavBar drawerButton={this.drawerButton}/>
-                    <Form
+                    <Formulaire
                         onSubmit={submission =>
                             this.setState({
                                 data: [...this.state.data, submission]
@@ -116,10 +122,7 @@ class App extends Component {
                             this.state.sortDirection
                         )}
                         header={[
-                            {
-                                name: "ID",
-                                prop: "Id"
-                            },
+
                             {
                                 name: "NOM",
                                 prop: "Nom"

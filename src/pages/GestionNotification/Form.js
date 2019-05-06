@@ -1,15 +1,20 @@
-import React from "react";
+import React, { Component } from "react";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 
-export default class Form extends React.Component {
+
+
+export default class Formulaire extends Component {
+
+
     state = {
-        Id: "",
+
         Nom: "",
         Date: "",
         Region: ""
 
     };
+
 
     change = e => {
         // this.props.onChange({ [e.target.name]: e.target.value });
@@ -43,7 +48,7 @@ export default class Form extends React.Component {
             this.props.onSubmit(this.state);
             // clear form
             this.setState({
-                Id: "",
+
                 idError: "",
                 Nom: "",
                 nomError: "",
@@ -56,17 +61,11 @@ export default class Form extends React.Component {
     };
 
     render() {
+
+
         return (
             <form>
-                <TextField
-                    name="Id"
-                    hintText="Id"
-                    floatingLabelText="ID"
-                    value={this.state.Id}
-                    onChange={e => this.change(e)}
-                    errorText={this.state.idError}
-                    floatingLabelFixed
-                />
+
                 <br />
                 <TextField
                     name="Nom"
@@ -80,14 +79,15 @@ export default class Form extends React.Component {
                 <br />
                 <TextField
                     name="Date"
-                    hintText="Date"
-                    floatingLabelText="Date"
-                    value={this.state.Date}
+                    date="date"
+                    label="Date"
+                    type="date"
+                    InputLabelProps={{
+                    shrink: true,
+                }}
+                    value={this.state.date}
                     onChange={e => this.change(e)}
-                    errorText={this.state.dateError}
-                    floatingLabelFixed
                 />
-                <br />
 
                 <TextField
                     name="Region"
@@ -104,4 +104,4 @@ export default class Form extends React.Component {
             </form>
         );
     }
-}
+};
