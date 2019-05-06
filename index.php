@@ -51,7 +51,6 @@ $app->get("/{field}/{fieldValue}/{model}", function ($request, $response, $args)
     $generatron = new CurlRequestGenerator(RequestType::$GET, new CurlRequestData($args['model'], null, $data));
 });
 
-
 $app->post('/{model}', function ($request, $response, $args){
     $data = $request->getParsedBody();
     $generatron = new CurlRequestGenerator(RequestType::$POST, new CurlRequestData($args['model'], null, $data));
@@ -68,6 +67,10 @@ $app->delete('/{model}/{id}', function ($request, $response, $args) use ($conten
     $data = $request->getParsedBody();
     $generatron = new CurlRequestGenerator(RequestType::$DELETE, new \backend\CurlRequestData($args['model'], $args['id'], $data));
     return $generatron->curlRequest();
+});
+
+$app->post('/usager/validate', function ($request, $response, $args) use ($content) {
+
 });
 
 // Run application
