@@ -36,7 +36,6 @@ export default class GestionType extends React.Component{
      */
     getDataFromChildPut(data){
         const axios = require('axios');
-        console.log(data);
         axios({
             method: 'put',
             url: 'http://localhost:80/type/' + data.idType.toString(),

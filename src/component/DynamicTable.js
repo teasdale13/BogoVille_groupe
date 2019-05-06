@@ -12,6 +12,7 @@ import {TableCell} from "@material-ui/core";
 import EditIcon from "material-ui/svg-icons/image/edit";
 import CheckIcon from "material-ui/svg-icons/navigation/check";
 import TrashIcon from "material-ui/svg-icons/action/delete";
+import Paper from "@material-ui/core/Paper";
 
 export default class DynamicTable extends React.Component {
     constructor(props) {
@@ -133,14 +134,14 @@ export default class DynamicTable extends React.Component {
     render() {
         /* Créer le HEADER du tableau */
         const headerRow = this.props.header.length <= 0 ?
-            <TableHeaderColumn>
+            <TableCell>
                 Rien a afficher
-            </TableHeaderColumn> :
+            </TableCell> :
             (this.props.header.map((item) =>
                     Object.values(item).map((key, value, item) =>
-                        <TableHeaderColumn>
+                        <TableCell>
                             {item[value].toUpperCase()}
-                        </TableHeaderColumn>
+                        </TableCell>
                     )
                 )
             );
@@ -148,14 +149,14 @@ export default class DynamicTable extends React.Component {
         /* Créer le tableau dynamiquement selon le nombre d'enregistrements. */
         const tableRow = this.state.listRow.length <= 0 ?
             <TableRow>
-                <TableRowColumn>
+                <TableCell>
                     Aucuns enregistrements
-                </TableRowColumn>
+                </TableCell>
             </TableRow> :
             (this.state.listRow.map((items, index) =>
                 <TableRow>
                     {Object.values(items).map((key, value, itemP) =>
-                        <TableRowColumn>{
+                        <TableCell>{
                             /* Vérifié si le state est vrai et que l'enregistrement qui est sélectionnée est le meme que
                             * l'enregistrement présent et que ce n'est pas le ID le TextView est remplacé par un TextField
                             * pour effectuer une modification. */
@@ -166,7 +167,7 @@ export default class DynamicTable extends React.Component {
                                         value={itemP[value]}
                                     /> :
                                 itemP[value] : itemP[value]}
-                        </TableRowColumn>)}
+                        </TableCell>)}
                     <TableCell
                     >{/* Vérifié si le state est vrai et que l'enregistrement qui est sélectionnée est le meme que
                        * l'enregistrement présent. L'icon crochet et visible si vrai, sinon c'est l'icon "crayon" qui
@@ -189,6 +190,7 @@ export default class DynamicTable extends React.Component {
 
         return (
             <div className="RightFlex">
+                <Paper>
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -200,6 +202,7 @@ export default class DynamicTable extends React.Component {
                         {tableRow}
                     </TableBody>
                 </Table>
+                </Paper>
             </div>
         )
     }
