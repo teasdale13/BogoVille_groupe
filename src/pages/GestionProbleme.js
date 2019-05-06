@@ -4,7 +4,6 @@ import Header from "../component/Header";
 import NavBar from "../component/NavBar";
 import DynamicTable from "../component/DynamicTable";
 import Footer from "../component/Footer";
-
 export default class GestionProbleme extends React.Component {
     constructor(props) {
         super(props);
