@@ -20,7 +20,6 @@ export default class DynamicTable extends React.Component {
             edit: false,
             rowClick: null,
             row: []
-
         };
         this.handleChange = this.handleChange.bind(this);
         this.updateRowClick = this.updateRowClick.bind(this);

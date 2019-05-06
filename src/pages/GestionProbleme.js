@@ -20,12 +20,6 @@ export default class GestionProbleme extends React.Component {
 
         };
         this.drawerButton = this.drawerButton.bind(this);
-
-    }
-
-    componentDidMount() {
-        /*  */
-
     }
 
     /**
@@ -35,8 +29,6 @@ export default class GestionProbleme extends React.Component {
     drawerButton() {
         this.setState({open: !this.state.open});
     }
-
-
 
     render() {
         return (
@@ -48,7 +40,7 @@ export default class GestionProbleme extends React.Component {
                     <div className="LeftFlex">
                         <p>??</p>
                     </div>
-                    <ProblemTable header={this.state.header} listRow={this.state.listRow}/>
+                    <ProblemTable header={this.state.header}/>
                 </div>
                 <Footer/>
             </div>
