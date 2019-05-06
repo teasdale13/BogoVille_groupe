@@ -38,9 +38,6 @@ export default class Status extends React.Component {
                 return this.state.status[x].description;
             }
         }
-        //console.log(this.state.status[indexOfArray]);
-        //console.log(indexOfArray);
-        //return this.state.status[indexOfArray].idStatut;
     }
 
     supportClick = event => {

@@ -73,10 +73,8 @@ export default class ProblemTable extends React.Component {
     changeSelectedStatus(childData, index) {
         const axios = require('axios');
         let array = this.state.listRow;
-        // METTRE ICI LA REQUETE PUT POUR CHANGER LE STATUT DANS LA BD
         array[index].id_statut = childData;
         this.setState({listRow: array});
-        console.log(array[index].idProbleme.toString());
         axios({
             method: 'put',
             url: 'http://localhost:80/probleme/'+ array[index].idProbleme.toString(),

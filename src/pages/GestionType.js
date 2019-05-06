@@ -11,13 +11,7 @@ export default class GestionType extends React.Component{
         this.state = {
             open: false,
             header: [{id: "ID", nom: "Nom" , description: "Description"}],
-            listRow: [
-                {id: 1, nom: "Nid de poule" , description: "Genre de trou dans la rue yo"},
-                {id: 2, nom: "Borne fontaine" , description: "Je sais pas c quoi mais criss ca coule"},
-                {id: 3, nom: "Arbre dans rue" , description: "Ca peux tu etre plus precis?"},
-                {id: 4, nom: "Yolaine" , description: "Yolaine a pas encore corriger calisse"},
-                {id: 5, nom: "Hold up a une banque" , description: "POW POW ca fait du bruit et ca fait peur"},
-            ]
+            listRow: []
         };
         this.drawerButton = this.drawerButton.bind(this);
     }
@@ -40,7 +34,8 @@ export default class GestionType extends React.Component{
                     <div className="LeftFlex">
                         <p>??</p>
                     </div>
-                    <DynamicTable header={this.state.header} listRow={this.state.listRow}/>
+
+                    <DynamicTable header={this.state.header} model={"type"}/>
                 </div>
                 <Footer/>
             </div>

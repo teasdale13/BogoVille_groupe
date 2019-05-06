@@ -54,7 +54,8 @@ $app->post('/{model}', function ($request, $response, $args) use ($content){
 
 });
 
-$app->put('\{model}\{id}', function ($request, $response, $args) use ($content){
+$app->put('/{model}/{id}', function ($request, $response, $args) use ($content){
+
 
     $data = $request->getParsedBody();
     var_dump($data);
