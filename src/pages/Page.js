@@ -38,7 +38,7 @@ export default class Page extends React.Component {
             <div className="App">
                 <Cdrawer drawer={this.state.open} drawerButton={this.drawerButton}/>
                 <Header title={"Bienvenue à Bogoville!"}/>
-                <NavBar drawerButton={this.drawerButton}/>
+                <NavBar drawerButton={this.drawerButton}></NavBar>
                 <div className="Horizontal">
                     <div className="LeftFlex">
                         <p>??</p>

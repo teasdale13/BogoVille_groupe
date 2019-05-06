@@ -61,6 +61,34 @@ class CurlRequestGenerator
         if($datas){
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($datas));
         }
+        return $this->executeCurl($ch);
+    }
+
+    /**
+     * Va chercher les info d'un utilisateur à partir de son courriel
+     * @param $email Courriel de l'usager
+     * @return bool|string
+     */
+    public function getUserWithEmail($email){
+        $this->url = $this->url . $this->requestData->getModel() . DIRECTORY_SEPARATOR . "validate" . DIRECTORY_SEPARATOR . $email;
+        $ch = curl_init($this->url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        return $this->executeCurl($ch);
+    }
+
+    public function getAllValueFromAGivenSubfield(){
+        $this->url = $this->url . $this->requestData->getDatas()['field'] . DIRECTORY_SEPARATOR . $this->requestData->getDatas()['fieldValue'] . DIRECTORY_SEPARATOR . $this->requestData->getModel();
+        $ch = curl_init($this->url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        return $this->executeCurl($ch);
+    }
+
+    /**
+     * Petite commande pour éviter de réécrire la même fonction tout le temp
+     * @param $ch
+     * @return bool|string
+     */
+    private function executeCurl($ch){
         $info = curl_exec($ch);
         if(curl_errno($ch)){
             $info = "Aucune information trouvée";
@@ -68,6 +96,5 @@ class CurlRequestGenerator
         curl_close($ch);
         return $info;
     }
-
 
 }
