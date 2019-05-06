@@ -13,17 +13,17 @@ export default class App extends React.Component {
             test: "",
             model:""
         };
-        this.Child = this.Child.bind(this);
+        //this.Child = this.Child.bind(this);
     }
 
-    /**
+   /* /!**
      * Requete http via Axios au BackEnd (index.php) du site internet
      * pour avoir l'information du Rest API
-     */
+     *!/
     onCharge (model, id){
         const axios = require('axios');
         let data = "";
-        axios.get('/' + model.toString() /* + "/" + id.toString()*/)
+        axios.get('/' + model.toString() /!* + "/" + id.toString()*!/)
             .then(function (response) {
                 console.log(response.data);
                 data = response.data.toString();
@@ -37,7 +37,7 @@ export default class App extends React.Component {
 
     Child({match}) {
         console.log(this);
-        /* Vérification pour éviter les requêtes en boucle infinie */
+        /!* Vérification pour éviter les requêtes en boucle infinie *!/
         if (match.params.model !== this.state.model){
             this.onCharge(match.params.model, match.params.id );
             this.setState({model: match.params.model})
@@ -56,7 +56,7 @@ export default class App extends React.Component {
         );
 
     }
-
+*/
   render() {
     return (
         <MuiThemeProvider>

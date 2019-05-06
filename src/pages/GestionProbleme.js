@@ -10,12 +10,7 @@ export default class GestionProbleme extends React.Component {
         super(props);
         this.state = {
             open: false,
-            // Listes factices qui simule les requêtes au service REST
-            types: [{id: 1, description: "type1"}, {id: 2, description: "type2"}, {id: 3, description: "type3"},
-                {id: 4, description: "type4"}, {id: 5, description: "type5"}, {id: 6, description: "type6"}],
-
             listRow: [],
-
             header: [{id: "ID", type: "Type", commentaire: "Commentaire", statut: "Statut"}]
 
         };

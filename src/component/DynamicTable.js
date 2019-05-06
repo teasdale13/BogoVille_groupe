@@ -156,7 +156,7 @@ export default class DynamicTable extends React.Component {
             (this.state.listRow.map((items, index) =>
                 <TableRow>
                     {Object.values(items).map((key, value, itemP) =>
-                        <TableCell>{
+                        <TableRowColumn>{
                             /* Vérifié si le state est vrai et que l'enregistrement qui est sélectionnée est le meme que
                             * l'enregistrement présent et que ce n'est pas le ID le TextView est remplacé par un TextField
                             * pour effectuer une modification. */
@@ -167,8 +167,8 @@ export default class DynamicTable extends React.Component {
                                         value={itemP[value]}
                                     /> :
                                 itemP[value] : itemP[value]}
-                        </TableCell>)}
-                    <TableCell
+                        </TableRowColumn>)}
+                    <TableRowColumn
                     >{/* Vérifié si le state est vrai et que l'enregistrement qui est sélectionnée est le meme que
                        * l'enregistrement présent. L'icon crochet et visible si vrai, sinon c'est l'icon "crayon" qui
                        * est visible si la condition est fausse. */}
@@ -184,21 +184,27 @@ export default class DynamicTable extends React.Component {
                         <TrashIcon
                             onClick={() => this.deleteRow(items)}
                         />
-                    </TableCell>
+                    </TableRowColumn>
                 </TableRow>
             ));
 
         return (
             <div className="RightFlex">
                 <Paper>
-                <Table>
-                    <TableHeader>
+                <Table >
+                    <TableHeader
+                        displaySelectAll={false}
+                        adjustForCheckbox={false}
+                    >
                         <TableRow>
+
                             {headerRow}
                             <TableCell/>
                         </TableRow>
                     </TableHeader>
-                    <TableBody>
+                    <TableBody
+                        displayRowCheckbox={false}
+                    >
                         {tableRow}
                     </TableBody>
                 </Table>

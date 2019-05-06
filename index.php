@@ -4,6 +4,9 @@
 require 'vendor/autoload.php';
 
 use backend\RequestType;
+use backend\CurlRequestGenerator;
+use backend\CurlRequestData;
+
 
 session_start();
 session_regenerate_id();
@@ -36,7 +39,7 @@ $app->get('/', function ($request, $response, $args) use($content){
 });
 
 $app->get('/{model}', function ($request, $response, $args){
-    $generatron = new CurlRequestGenerator(RequestType::$GET, new CurlRequestData($args['model']));
+    $generatron = new  backend\CurlRequestGenerator(RequestType::$GET, new CurlRequestData($args['model']));
     return $generatron->curlRequest();
 });
 
@@ -68,6 +71,10 @@ $app->delete('/{model}/{id}', function ($request, $response, $args) use ($conten
     $data = $request->getParsedBody();
     $generatron = new CurlRequestGenerator(RequestType::$DELETE, new \backend\CurlRequestData($args['model'], $args['id'], $data));
     return $generatron->curlRequest();
+});
+
+$app->post('/usager/validate', function($request, $response, $args) use ($content){
+   echo("blabla");
 });
 
 // Run application

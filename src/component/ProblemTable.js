@@ -176,12 +176,15 @@ export default class ProblemTable extends React.Component {
         return (
             <div className="RightFlex">
                 <Table>
-                    <TableHeader>
+                    <TableHeader
+                        displaySelectAll={false}
+                        adjustForCheckbox={false}>
                         <TableRow>
                             {headerRow}
                         </TableRow>
                     </TableHeader>
-                    <TableBody>
+                    <TableBody
+                        displayRowCheckbox={false}>
                         {tableRow}
                     </TableBody>
                 </Table>

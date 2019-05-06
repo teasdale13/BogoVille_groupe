@@ -4,6 +4,7 @@ import GestionType from "./pages/GestionType";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import GestionProbleme from "./pages/GestionProbleme";
 import Accueil from "./pages/Accueil";
+import GestionStatut from "./pages/GestionStatut";
 
 function Nav() {
     return (

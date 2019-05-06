@@ -42,7 +42,7 @@ export default class LogInFormPopup extends React.Component {
                 //console.log(res.data);
                 this.alertDialog.current.handleOpening();
             }
-        });
+        }.bind(this));
     };
 
     render() {
