@@ -13,6 +13,8 @@
 //    \____/\__,_/_/  /_/_/ |_|\___/\__, /\__,_/\___/____/\__/_____/\__,_/\__/\__,_/
 //                                    /_/
 
+namespace backend;
+
 class CurlRequestData
 {
     private $model;

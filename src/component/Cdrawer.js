@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import MenuItem from "material-ui/MenuItem";
 import React from "react";
 import RaisedButton from 'material-ui/RaisedButton';
@@ -48,6 +48,8 @@ export default class Cdrawer extends React.Component {
                                 Problèmes</MenuItem></Link>
                             <Link to="/GestionNotification/notification" style={{textDecoration: 'none'}}><MenuItem>Gestion des
                                 Notifications</MenuItem></Link>
+                            <Link to="/GestionStatut" style={{textDecoration: 'none'}}><MenuItem>Gestion des
+                                Statuts</MenuItem></Link>
                             <RaisedButton label="Fermer" onClick={this.toggleButton}/>
                         </div>
                     </Drawer>

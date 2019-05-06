@@ -13,7 +13,7 @@ class CurlRequestGenerator
 
     private $requestType;
     private $requestData;
-    private $url = "localhost/";
+    private $url = "bogoville.xyz/rest/";
 
     /**
      * CurlRequestGenerator constructor.
