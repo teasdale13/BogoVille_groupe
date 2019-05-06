@@ -14,6 +14,7 @@ class DBIndex
     const DB_URL = "www.bogoville.xyz/rest/";
     const DB_URL_ALLMODEL = self::DB_URL . "{model}";
     const DB_URL_SINGLEMODEL = "/{id}";
+    const USAGER_TABLE_NAME = "usager";
 
     /**
      * Créer un URL pour avoir accèes a tout l'information du "model" passé

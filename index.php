@@ -5,6 +5,18 @@ require 'vendor/autoload.php';
 
 use backend\RequestType;
 
+session_start();
+session_regenerate_id();
+if(!isset($_SESSION['LAST_ACTIVITY'])){
+    $_SESSION['LAST_ACTIVITY'] = time();
+}
+if (time() - $_SESSION['LAST_ACTIVITY'] > 1800) { //1800 secondes = 30m
+    session_unset();
+    session_destroy();
+    session_start(['LAST_ACTIVITY'] == time());
+} else if(time() != $_SESSION['LAST_ACTIVITY']) {
+    $SESSION['LAST_ACTIVITY'] = time();
+}
 
 $configuration = [
     'settings' => [
@@ -16,7 +28,6 @@ $c = new \Slim\Container($configuration);
 // instantiate the App object
 $app = new \Slim\App($c);
 
-
 $content = file_get_contents(getcwd(). DIRECTORY_SEPARATOR .'build' . DIRECTORY_SEPARATOR . 'index.html');
 
 $app->get('/', function ($request, $response, $args) use($content){
@@ -25,49 +36,39 @@ $app->get('/', function ($request, $response, $args) use($content){
 });
 
 $app->get('/{model}', function ($request, $response, $args){
-
-        $generatron = new \backend\CurlRequestGenerator(RequestType::$GET, new \backend\CurlRequestData($args['model']));
-        return $generatron->curlRequest();
-
+    $generatron = new CurlRequestGenerator(RequestType::$GET, new CurlRequestData($args['model']));
+    return $generatron->curlRequest();
 });
 
 $app->get('/{model}/{id}', function ($request, $response, $args){
-
-        $generatron = new \backend\CurlRequestGenerator(RequestType::$GET, new \backend\CurlRequestData($args['model'], $args['id']));
-        return $generatron->curlRequest();
-
+    $generatron = new CurlRequestGenerator(RequestType::$GET, new CurlRequestData($args['model'], $args['id']));
+    return $generatron->curlRequest();
 });
 
 $app->get("/{field}/{fieldValue}/{model}", function ($request, $response, $args) {
-
-            $generatron = new \backend\CurlRequestGenerator(RequestType::$GET, new \backend\CurlRequestData($args['model']));
-            return $generatron->curlRequest();
-
+    $data = ['field' => $args['field'],
+            'fieldValue' => $args['fieldValue']];
+    $generatron = new CurlRequestGenerator(RequestType::$GET, new CurlRequestData($args['model'], null, $data));
 });
 
 
-$app->post('/{model}', function ($request, $response, $args) use ($content){
-
+$app->post('/{model}', function ($request, $response, $args){
     $data = $request->getParsedBody();
-    $generatron = new \backend\CurlRequestGenerator(RequestType::$POST, new \backend\CurlRequestData($args['model'], null, $data));
+    $generatron = new CurlRequestGenerator(RequestType::$POST, new CurlRequestData($args['model'], null, $data));
     return $generatron->curlRequest();
-
 });
 
-$app->put('/{model}/{id}', function ($request, $response, $args) use ($content){
+$app->put('/{model}/{id}', function ($request, $response, $args){
     $data = $request->getParsedBody();
-    $generatron = new \backend\CurlRequestGenerator(RequestType::$PUT, new \backend\CurlRequestData($args['model'], $args['id'], $data));
+    $generatron = new CurlRequestGenerator(RequestType::$PUT, new CurlRequestData($args['model'], $args['id'], $data));
     return $generatron->curlRequest();
-
 });
 
-$app->delete('/{model}/{id}', function ($request, $response, $args) use ($content){
+$app->delete('/{model}/{id}', function ($request, $response, $args) use ($content) {
     $data = $request->getParsedBody();
-    $generatron = new \backend\CurlRequestGenerator(RequestType::$DELETE, new \backend\CurlRequestData($args['model'], $args['id'], $data));
+    $generatron = new CurlRequestGenerator(RequestType::$DELETE, new \backend\CurlRequestData($args['model'], $args['id'], $data));
     return $generatron->curlRequest();
-
 });
-
 
 // Run application
 $app->run();
