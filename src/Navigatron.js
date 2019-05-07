@@ -4,14 +4,15 @@ import GestionType from "./pages/GestionType";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import GestionProbleme from "./pages/GestionProbleme";
 import Accueil from "./pages/Accueil";
+import GestionStatut from "./pages/GestionStatut";
 
 function Nav() {
     return (
 
         <Router>
-                <Route exact path="/" component={Accueil} />
+            <Route exact path="/" component={Accueil} />
 
-                <Route path="/Page" component={Page} />
+            <Route path="/Page" component={Page} />
 
             <Route path="/GestionType" component={GestionType}/>
 

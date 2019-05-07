@@ -33,16 +33,15 @@ export default class LogInFormPopup extends React.Component {
         let password = document.getElementById("textFieldPassword").value;
         const axios = require('axios');
 
-        axios.post('http://localhost:80/usager/validate', {email: email, password: password})
+        axios.post('http://localhost/usager/validate/' + email + "/val", {email: email, password: password})
             .then(function (response){
-            console.log("Je suis dans le .then()");
+            console.log(response.data);
             if(response.data['state'] === "CONNECTED"){
                 window.location("/Page")
             } else {
-                //console.log(res.data);
                 this.alertDialog.current.handleOpening();
             }
-        });
+        }.bind(this));
     };
 
     render() {
@@ -56,7 +55,7 @@ export default class LogInFormPopup extends React.Component {
                     onClose={this.handleClose}
                     aria-labelledby="form-dialog-title"
                 >
-                    <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Connexion à Bogoville</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
                             Pour vous créer un compte BogoVille, remplissez les champs suivant.

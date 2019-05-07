@@ -4,6 +4,8 @@
 require 'vendor/autoload.php';
 
 use backend\RequestType;
+use backend\CurlRequestGenerator;
+use backend\CurlRequestData;
 
 session_start();
 session_regenerate_id();
@@ -13,14 +15,14 @@ if(!isset($_SESSION['LAST_ACTIVITY'])){
 if (time() - $_SESSION['LAST_ACTIVITY'] > 1800) { //1800 secondes = 30m
     session_unset();
     session_destroy();
-    session_start(['LAST_ACTIVITY'] == time());
+    session_start(['LAST_ACTIVITY' => time()]);
 } else if(time() != $_SESSION['LAST_ACTIVITY']) {
     $SESSION['LAST_ACTIVITY'] = time();
 }
 
 $configuration = [
     'settings' => [
-        'displayErrorDetails' => false,
+        'displayErrorDetails' => true,
     ],
 ];
 $c = new \Slim\Container($configuration);
@@ -69,8 +71,23 @@ $app->delete('/{model}/{id}', function ($request, $response, $args) use ($conten
     return $generatron->curlRequest();
 });
 
-$app->post('/usager/validate', function ($request, $response, $args) use ($content) {
-
+$app->post('/usager/validate/{email}/val', function ($request, $response, $args) use ($content) {
+    $responseArray = [];
+    $data = $request->getParsedBody();
+    $generatron = new CurlRequestGenerator(RequestType::$GET, new CurlRequestData("usager", null, $data));
+    $user = $generatron->getUserWithEmail($data['email']);
+    var_dump($user);
+    if (!password_verify($data['password'], $user['password'])){ //Si il y a pas de users ou que le mot de passe ne correspond pas
+        $_SESSION['state'] = "NOT CONNECTED";
+        header("Impposible d'authentifier",null, 401);
+    } else {
+        $_SESSION['user_id'] = $user['idUsager'];
+        $_SESSION['state'] = "CONNECTED";
+        $_SESSION['usager'] = $user['email'];
+        $_SESSION['ville'] = $user['id_ville'];
+    };
+    $responseArray['state'] = $_SESSION['state'];
+    return $responseArray;
 });
 
 // Run application
