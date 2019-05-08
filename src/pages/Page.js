@@ -43,7 +43,6 @@ export default class Page extends React.Component {
                     <div className="LeftFlex">
                         <p>??</p>
                     </div>
-                    <DynamicTable header={this.state.header} listRow={this.state.listRow} />
                 </div>
                 <Footer/>
             </div>

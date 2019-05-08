@@ -10,9 +10,9 @@ function Nav() {
     return (
 
         <Router>
-                <Route exact path="/" component={Accueil} />
+            <Route exact path="/" component={Accueil} />
 
-                <Route path="/Page" component={Page} />
+            <Route path="/Page" component={Page} />
 
             <Route path="/GestionType" component={GestionType}/>
 

@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AlertDialog from "./AlertDialog";
+import Redirectatron from "./Redirectatron";
 
 //TODO Limiter les types d'input à ce qu'on veut. Info sur les input types pas dispo sur la doc de material UI
 export default class LogInFormPopup extends React.Component {
@@ -14,6 +15,7 @@ export default class LogInFormPopup extends React.Component {
     constructor(props){
         super(props);
         this.alertDialog = React.createRef();
+        this.redirectatron = React.createRef();
     }
 
     state = {
@@ -33,16 +35,15 @@ export default class LogInFormPopup extends React.Component {
         let password = document.getElementById("textFieldPassword").value;
         const axios = require('axios');
 
-        axios.post('http://localhost:80/usager/validate', {email: email, password: password})
+        axios.post('http://localhost/usager/validate/' + encodeURIComponent(email) + "/val", {email: email, password: password})
             .then(function (response){
-            console.log("Je suis dans le .then()");
-            if(response.data['state'] === "CONNECTED"){
-                window.location("/Page")
-            } else {
-                //console.log(res.data);
-                this.alertDialog.current.handleOpening();
-            }
-        }.bind(this));
+                if(response.data == "CONNECTED"){
+                    console.log("Va vers Page");
+                    this.redirectatron.current.setRedirect();
+                } else {
+                    this.alertDialog.current.handleOpening();
+                }
+            }.bind(this));
     };
 
     render() {
@@ -56,7 +57,7 @@ export default class LogInFormPopup extends React.Component {
                     onClose={this.handleClose}
                     aria-labelledby="form-dialog-title"
                 >
-                    <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Connexion à Bogoville</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
                             Pour vous créer un compte BogoVille, remplissez les champs suivant.
@@ -90,6 +91,7 @@ export default class LogInFormPopup extends React.Component {
                     </DialogActions>
                 </Dialog>
                 <AlertDialog ref={this.alertDialog}/>
+                <Redirectatron ref={this.redirectatron}/>
             </div>
         );
     }

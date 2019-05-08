@@ -7,7 +7,6 @@ use backend\RequestType;
 use backend\CurlRequestGenerator;
 use backend\CurlRequestData;
 
-
 session_start();
 session_regenerate_id();
 if(!isset($_SESSION['LAST_ACTIVITY'])){
@@ -16,14 +15,15 @@ if(!isset($_SESSION['LAST_ACTIVITY'])){
 if (time() - $_SESSION['LAST_ACTIVITY'] > 1800) { //1800 secondes = 30m
     session_unset();
     session_destroy();
-    session_start(['LAST_ACTIVITY'] == time());
+    session_start();
+    $_SESSION['LAST_ACTIVITY'] = time();
 } else if(time() != $_SESSION['LAST_ACTIVITY']) {
     $SESSION['LAST_ACTIVITY'] = time();
 }
 
 $configuration = [
     'settings' => [
-        'displayErrorDetails' => false,
+        'displayErrorDetails' => true,
     ],
 ];
 $c = new \Slim\Container($configuration);
@@ -34,12 +34,11 @@ $app = new \Slim\App($c);
 $content = file_get_contents(getcwd(). DIRECTORY_SEPARATOR .'build' . DIRECTORY_SEPARATOR . 'index.html');
 
 $app->get('/', function ($request, $response, $args) use($content){
-    //return "T'as rien à faire ici, maudit gibier d'potence!";
     echo $content;
 });
 
 $app->get('/{model}', function ($request, $response, $args){
-    $generatron = new  backend\CurlRequestGenerator(RequestType::$GET, new CurlRequestData($args['model']));
+    $generatron = new CurlRequestGenerator(RequestType::$GET, new CurlRequestData($args['model']));
     return $generatron->curlRequest();
 });
 
@@ -53,7 +52,6 @@ $app->get("/{field}/{fieldValue}/{model}", function ($request, $response, $args)
             'fieldValue' => $args['fieldValue']];
     $generatron = new CurlRequestGenerator(RequestType::$GET, new CurlRequestData($args['model'], null, $data));
 });
-
 
 $app->post('/{model}', function ($request, $response, $args){
     $data = $request->getParsedBody();
@@ -73,8 +71,21 @@ $app->delete('/{model}/{id}', function ($request, $response, $args) use ($conten
     return $generatron->curlRequest();
 });
 
-$app->post('/usager/validate', function($request, $response, $args) use ($content){
-   echo("blabla");
+$app->post('/usager/validate/{email}/val', function ($request, $response, $args) use ($content) {
+    $data = $request->getParsedBody();
+    $generatron = new CurlRequestGenerator(RequestType::$GET, new CurlRequestData("usager", null, $data));
+    $user = $generatron->getUserWithEmail(urldecode($data['email']));
+    $userToArray = json_decode($user, true);
+    if (!password_verify($data['password'], $userToArray['password'])){ //Si il y a pas de users ou que le mot de passe ne correspond pas
+        $_SESSION['state'] = "NOT CONNECTED";
+        header("Impposible d'authentifier",null, 401);
+    } else {
+        $_SESSION['user_id'] = $userToArray['idUsager'];
+        $_SESSION['state'] = "CONNECTED";
+        $_SESSION['usager'] = $userToArray['email'];
+        $_SESSION['ville'] = $userToArray['id_ville'];
+    };
+    return $_SESSION['state'];
 });
 
 // Run application

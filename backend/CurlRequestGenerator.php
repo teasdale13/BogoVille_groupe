@@ -40,7 +40,6 @@ class CurlRequestGenerator
         return self::generateRequest(curl_init($this->url), $this->requestType, $this->requestData->getDatas());
     }
 
-
     private function setCurlBasicAuthentification($ch, $user='admin', $pass='admin'){
         curl_setopt($ch, CURLOPT_USERPWD, "$user:$pass");
     }
@@ -69,10 +68,12 @@ class CurlRequestGenerator
      * @param $email Courriel de l'usager
      * @return bool|string
      */
-    public function getUserWithEmail($email){
-        $this->url = $this->url . $this->requestData->getModel() . DIRECTORY_SEPARATOR . "validate" . DIRECTORY_SEPARATOR . $email;
+    public function getUserWithEmail(string $email){
+        $this->url = $this->url . "usager/validate/" . urlencode($email) . "/val";
         $ch = curl_init($this->url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPGET, true);
+        $this->setCurlBasicAuthentification($ch);
         return $this->executeCurl($ch);
     }
 
@@ -91,6 +92,7 @@ class CurlRequestGenerator
     private function executeCurl($ch){
         $info = curl_exec($ch);
         if(curl_errno($ch)){
+            (curl_errno($ch));
             $info = "Aucune information trouvée";
         }
         curl_close($ch);
