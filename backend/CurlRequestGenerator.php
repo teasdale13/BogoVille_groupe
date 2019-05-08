@@ -13,7 +13,8 @@ class CurlRequestGenerator
 
     private $requestType;
     private $requestData;
-    private $url = "http://bogoville.xyz/rest/";
+    //TODO mettre le bon URL
+    private $url = "http://localhost/rest/";
 
     /**
      * CurlRequestGenerator constructor.
@@ -70,7 +71,6 @@ class CurlRequestGenerator
      */
     public function getUserWithEmail(string $email){
         $this->url = $this->url . "usager/validate/" . urlencode($email) . "/val";
-        var_dump($this->url);
         $ch = curl_init($this->url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPGET, true);

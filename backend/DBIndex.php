@@ -11,7 +11,8 @@ namespace backend;
  */
 class DBIndex
 {
-    const DB_URL = "www.bogoville.xyz/rest/";
+    //TODO réglé l'URL
+    const DB_URL = "localhost/rest/";
     const DB_URL_ALLMODEL = self::DB_URL . "{model}";
     const DB_URL_SINGLEMODEL = "/{id}";
     const USAGER_TABLE_NAME = "usager";
